@@ -1,0 +1,77 @@
+# =========================
+# Python
+# =========================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+.eggs/
+
+# =========================
+# Virtual Environment
+# =========================
+.venv/
+venv/
+env/
+
+# =========================
+# OS / Editor
+# =========================
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# =========================
+# PyTorch / YOLO Outputs
+# =========================
+runs/
+emotion_runs/
+wandb/
+logs/
+checkpoints/
+
+# =========================
+# Model Weights
+# =========================
+*.pth
+*.onnx
+*.engine
+*.torchscript
+*.mlmodel
+
+# =========================
+# DATASETS (IMPORTANT)
+# =========================
+data/
+dataset/
+datasets/
+archive/
+train_test_split/
+kaggle/
+Faces_detection/
+EmotionsDataset_Splitted/
+
+# Optional: ignore all images if needed
+# *.jpg
+# *.png
+# *.jpeg
+
+# =========================
+# Cache / Temp
+# =========================
+.cache/
+tmp/
+temp/
+
+# =========================
+# Jupyter
+# =========================
+.ipynb_checkpoints/
+
+# =========================
+# Ultralytics
+# =========================
+ultralytics/
