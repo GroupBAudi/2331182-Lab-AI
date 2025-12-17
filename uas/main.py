@@ -219,6 +219,7 @@ class TwoStageEmotionDetector:
             height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
             out = cv2.VideoWriter(output_path, fourcc, fps, (width, height))
         
+        print("\nProcessing video... Press 'q' to quit")
         frame_count = 0
         
         while cap.isOpened():
@@ -233,19 +234,24 @@ class TwoStageEmotionDetector:
                 frame, conf_face=conf_face, conf_emotion=conf_emotion
             )
             
-            if annotated_frame is not None:
-                # Add frame info overlay
-                info_text = f"Frame: {frame_count} | Faces: {len(emotions) if emotions else 0}"
-                cv2.putText(annotated_frame, info_text, (10, 30),
-                           cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2)
-                
-                # Display frame
-                cv2.imshow('Emotion Detection', annotated_frame)
-                
-                # Save frame if recording
-                if output_path:
-                    out.write(annotated_frame)
+            # Always use the frame (annotated or original)
+            display_frame = annotated_frame if annotated_frame is not None else frame
             
+            # Add frame info overlay
+            info_text = f"Frame: {frame_count} | Faces: {len(emotions) if emotions else 0}"
+            cv2.putText(display_frame, info_text, (10, 30),
+                       cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2)
+            
+            # Display frame
+            cv2.imshow('Emotion Detection', display_frame)
+            
+            # Save frame if recording
+            if output_path:
+                out.write(display_frame)
+            
+            # Check for quit command (MUST be after imshow)
+            if cv2.waitKey(1) & 0xFF == ord('q'):
+                break
         
         # Cleanup
         cap.release()
